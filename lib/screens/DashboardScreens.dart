@@ -53,7 +53,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
       extendBody: true,
       appBar: _getAppBar(),
       body: _getCurrentPage(),
