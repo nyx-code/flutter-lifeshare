@@ -8,6 +8,7 @@ const Color nearlyWhite = Color(0xFFFAFAFA);
 const Color white = Color(0xFFFFFFFF);
 const Color background = Color(0xFFF2F3F8);
 const Color nearlyDarkBlue = Color(0xFF2633C5);
+const Color black = Color(0xFF000000);
 
 const Color nearlyBlue = Color(0xFF00B6F0);
 const Color nearlyBlack = Color(0xFF213333);
