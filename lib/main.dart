@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         accentColor: kAccentColor,
         fontFamily: "Poppins",
       ),
-      home: SignupScreen(),
+      home: LoginScreen(),
     );
   }
 }

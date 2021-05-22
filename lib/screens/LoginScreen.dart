@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/CustomButton.dart';
+import 'package:lifeshare/widgets/CustomDropDown.dart';
 import 'package:lifeshare/widgets/CustomSwitch.dart';
 import 'package:lifeshare/widgets/TextFields/DefaultTextField.dart';
 import 'package:lifeshare/widgets/TextFields/EmailTextField.dart';
@@ -15,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _enable = false;
+  String _userType = "Donor";
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +57,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         validate: true,
                       ),
                       PasswordTextField(TextEditingController()),
-                      // CustomSwitch(
-                      //   value: _enable,
-                      //   onChanged: (bool val) {
-                      //     setState(() {
-                      //       _enable = val;
-                      //     });
-                      //   },
-                      // ),
+                      CustomDropDown(
+                        title: "Account Type",
+                        data: ["Donor", "Reciever"],
+                        selectedDropdownValue: _userType,
+                        onChanged: (value) {
+                          setState(() {
+                            _userType = value;
+                          });
+                        },
+                      ),
                       CustomButton(
                         title: 'LOGIN',
                         onPressed: () {},
