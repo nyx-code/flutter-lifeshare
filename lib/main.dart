@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/screens/DashboardScreens.dart';
+import 'package:lifeshare/screens/DonorProfile.dart';
 import 'package:lifeshare/screens/InitialScreen.dart';
 import 'package:lifeshare/screens/LoginScreen.dart';
 import 'package:lifeshare/screens/SignupScreen.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         accentColor: kAccentColor,
         fontFamily: "Poppins",
       ),
-      home: DashboardScreen(),
+      home: DonorProfile(),
     );
   }
 }
