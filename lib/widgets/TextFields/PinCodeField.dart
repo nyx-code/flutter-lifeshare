@@ -5,8 +5,11 @@ import 'package:lifeshare/widgets/TextFields/DefaultTextField.dart';
 class PinCodeField extends StatelessWidget {
   final TextEditingController controller;
   final String labelStr;
+  final bool enabled;
+
   const PinCodeField({
     @required this.controller,
+    this.enabled = true,
     this.labelStr = "Postcode/Zip",
   });
 
@@ -14,6 +17,7 @@ class PinCodeField extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTextField(
       controller: controller,
+      enabled: enabled,
       labelTextStrr: labelStr,
       isValidate: false,
       inputFormatters: [

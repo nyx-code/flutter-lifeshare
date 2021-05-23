@@ -1,6 +1,4 @@
-class LoginDataModel {
-  String accessToken;
-  String userType;
+class ProfileDataModel {
   Address address;
   ReportsDates reportsDates;
   String sId;
@@ -15,10 +13,9 @@ class LoginDataModel {
   String haveChild;
   int iV;
   String patientBG;
-  LoginDataModel(
-      {this.accessToken,
-      this.userType,
-      this.address,
+
+  ProfileDataModel(
+      {this.address,
       this.reportsDates,
       this.sId,
       this.name,
@@ -33,9 +30,7 @@ class LoginDataModel {
       this.iV,
       this.patientBG});
 
-  LoginDataModel.fromJson(Map<String, dynamic> json) {
-    accessToken = json['accessToken'];
-    userType = json['userType'];
+  ProfileDataModel.fromJson(Map<String, dynamic> json) {
     address =
         json['address'] != null ? new Address.fromJson(json['address']) : null;
     reportsDates = json['reportsDates'] != null
@@ -53,6 +48,28 @@ class LoginDataModel {
     haveChild = json['haveChild'];
     iV = json['__v'];
     patientBG = json['patientBG'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.address != null) {
+      data['address'] = this.address.toJson();
+    }
+    if (this.reportsDates != null) {
+      data['reportsDates'] = this.reportsDates.toJson();
+    }
+    data['_id'] = this.sId;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['avatar'] = this.avatar;
+    data['mobile'] = this.mobile;
+    data['age'] = this.age;
+    data['weight'] = this.weight;
+    data['bloodGroup'] = this.bloodGroup;
+    data['gender'] = this.gender;
+    data['haveChild'] = this.haveChild;
+    data['__v'] = this.iV;
+    return data;
   }
 }
 

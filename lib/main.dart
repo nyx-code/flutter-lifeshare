@@ -5,7 +5,9 @@ import 'package:lifeshare/bloc/login/login_cubit.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/injection.dart';
 import 'package:lifeshare/screens/DashboardScreens.dart';
+import 'package:lifeshare/screens/login_screen/Login.dart';
 import 'package:lifeshare/screens/login_screen/LoginScreen.dart';
+import 'package:lifeshare/screens/main_screen/main_screen.dart';
 import 'package:lifeshare/screens/splash_screen/splash_screen.dart';
 import 'package:lifeshare/style/theme.dart';
 import 'package:lifeshare/widgets/loading.dart';
@@ -35,12 +37,9 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthCubit, AuthState>(
         builder: (context, state) {
           if (state is AppAuth) {
-            return DashboardScreen();
+            return MainScreen();
           } else if (state is AppUnAuth) {
-            return BlocProvider(
-              create: (context) => getIt<LoginCubit>(),
-              child: LoginScreen(),
-            );
+            return Login();
           } else if (state is AppLoading) {
             return LoadingFull();
           }

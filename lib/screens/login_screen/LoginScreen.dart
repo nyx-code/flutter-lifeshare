@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lifeshare/bloc/auth/auth_cubit.dart';
 import 'package:lifeshare/bloc/login/login_cubit.dart';
 import 'package:lifeshare/constant.dart';
+import 'package:lifeshare/screens/main_screen/main_screen.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/CustomButton.dart';
 import 'package:lifeshare/widgets/CustomDropDown.dart';
@@ -45,80 +46,78 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomAppBar(title: "Login Screen"),
-        body: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
-          if (state is LoginSuccess) {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => DashboardScreen()),
-                (Route<dynamic> route) => false);
-          }
-        }, builder: (context, state) {
-          return Stack(
-            children: [
-              Container(
-                color: nearlyWhite,
-                child: Column(
-                  children: [
-                    SizedBox(height: spaceM * 3),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: paddingM),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: paddingM,
+    return BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
+      if (state is LoginSuccess) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => MainScreen()),
+            (Route<dynamic> route) => false);
+      }
+    }, builder: (context, state) {
+      return Stack(
+        children: [
+          Container(
+            color: nearlyWhite,
+            child: Column(
+              children: [
+                SizedBox(height: spaceM * 3),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: paddingM),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: paddingM,
+                    ),
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 5,
+                          blurRadius: 10,
+                          offset: Offset(0, 5),
                         ),
-                        decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(6),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 5,
-                              blurRadius: 10,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: spaceM + spaceS,
-                              ),
-                              EmailTextField(
-                                controller: _emailController,
-                                validate: true,
-                              ),
-                              PasswordTextField(_passwordController),
-                              CustomDropDown(
-                                title: "Account Type",
-                                data: ["Donor", "Reciever"],
-                                selectedDropdownValue: _userType,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _userType = value;
-                                  });
-                                },
-                              ),
-                              CustomButton(
-                                title: 'LOGIN',
-                                onPressed: _onPress,
-                              ),
-                              SizedBox(
-                                height: spaceM + spaceS,
-                              ),
-                            ],
+                      ],
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: spaceM + spaceS,
                           ),
-                        ),
+                          EmailTextField(
+                            controller: _emailController,
+                            validate: true,
+                          ),
+                          PasswordTextField(_passwordController),
+                          CustomDropDown(
+                            title: "Account Type",
+                            data: ["Donor", "Reciever"],
+                            selectedDropdownValue: _userType,
+                            onChanged: (value) {
+                              setState(() {
+                                _userType = value;
+                              });
+                            },
+                          ),
+                          CustomButton(
+                            title: 'LOGIN',
+                            onPressed: _onPress,
+                          ),
+                          SizedBox(
+                            height: spaceM + spaceS,
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              if (state is LoginLoading) Loading()
-            ],
-          );
-        }));
+              ],
+            ),
+          ),
+          if (state is LoginLoading) Loading()
+        ],
+      );
+    });
   }
 }

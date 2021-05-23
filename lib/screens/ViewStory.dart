@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lifeshare/constant.dart';
+import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 
 class ViewStory extends StatelessWidget {
+  final DonorDataModel model;
+
+  const ViewStory({@required this.model});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,15 +43,14 @@ class ViewStory extends StatelessWidget {
                         alignment: Alignment.center,
                         child: CircleAvatar(
                           radius: 50,
-                          backgroundImage: NetworkImage(
-                              "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png"),
+                          backgroundImage: NetworkImage(model.donorId.avatar),
                         ),
                       ),
                       SizedBox(
                         height: spaceS,
                       ),
                       Text(
-                        "Shailesh Kadam",
+                        model.donorId.name,
                         style: Theme.of(context)
                             .textTheme
                             .headline5
@@ -63,7 +67,7 @@ class ViewStory extends StatelessWidget {
                           ),
                           SizedBox(width: spaceM),
                           Text(
-                            "Pune",
+                            model.donorId.address.city,
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle1
@@ -98,7 +102,7 @@ class ViewStory extends StatelessWidget {
                     ],
                   ),
                   child: Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    model.storyData,
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.subtitle1,
                   ),

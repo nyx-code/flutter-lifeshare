@@ -54,6 +54,7 @@ class PostItem extends StatelessWidget {
                 child: Text(
                   name,
                   textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
                   style: Theme.of(context)
                       .textTheme
                       .subtitle1

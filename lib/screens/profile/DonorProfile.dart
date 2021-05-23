@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifeshare/constant.dart';
+import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/CustomButton.dart';
 import 'package:lifeshare/widgets/CustomDropDown.dart';
@@ -10,41 +11,29 @@ import 'package:lifeshare/utils/DateTime.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class DonorProfile extends StatefulWidget {
+  final DonorDataModel model;
+
+  const DonorProfile({@required this.model});
+
   @override
   _DonorProfileState createState() => _DonorProfileState();
 }
 
 class _DonorProfileState extends State<DonorProfile> {
-  final _formKey = GlobalKey<FormState>();
+  TextEditingController _area, _city, _state, _pincode;
 
-  String _bloodType = "A";
-  DateTime selectedDate1 = DateTime.now();
-  DateTime selectedDate2 = DateTime.now();
+  String _bloodType;
 
-  _selectDate1(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate1, // Refer step 1
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2022),
-    );
-    if (picked != null && picked != selectedDate1)
-      setState(() {
-        selectedDate1 = picked;
-      });
-  }
-
-  _selectDate2(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate2, // Refer step 1
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2022),
-    );
-    if (picked != null && picked != selectedDate2)
-      setState(() {
-        selectedDate2 = picked;
-      });
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _area = TextEditingController(text: widget.model.donorId.address.area);
+    _city = TextEditingController(text: widget.model.donorId.address.city);
+    _state = TextEditingController(text: widget.model.donorId.address.state);
+    _pincode = TextEditingController(
+        text: widget.model.donorId.address.pincode.toString());
+    _bloodType = widget.model.donorId.bloodGroup;
   }
 
   @override
@@ -86,27 +75,27 @@ class _DonorProfileState extends State<DonorProfile> {
                         alignment: Alignment.center,
                         child: CircleAvatar(
                           radius: 50,
-                          backgroundImage: NetworkImage(
-                              "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png"),
+                          backgroundImage:
+                              NetworkImage(widget.model.donorId.avatar),
                         ),
                       ),
                       SizedBox(
                         height: spaceS,
                       ),
                       Text(
-                        "Shailesh Kadam",
+                        widget.model.donorId.name,
                         style: Theme.of(context)
                             .textTheme
                             .headline5
                             .copyWith(fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        "+91 8446842249",
+                        "+91 ${widget.model.donorId.mobile}",
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       SizedBox(height: spaceS),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: paddingM),
+                        padding: EdgeInsets.symmetric(horizontal: paddingS),
                         child: CustomButton(
                           title: 'CALL NOW',
                           onPressed: () {},
@@ -156,19 +145,23 @@ class _DonorProfileState extends State<DonorProfile> {
                               height: spaceS,
                             ),
                             DefaultTextField(
-                              controller: TextEditingController(),
+                              controller: _area,
+                              enabled: false,
                               labelTextStrr: "Area / Local",
                             ),
                             DefaultTextField(
-                              controller: TextEditingController(),
+                              controller: _city,
+                              enabled: false,
                               labelTextStrr: "City",
                             ),
                             DefaultTextField(
-                              controller: TextEditingController(),
+                              controller: _state,
+                              enabled: false,
                               labelTextStrr: "State",
                             ),
                             PinCodeField(
-                              controller: TextEditingController(),
+                              controller: _pincode,
+                              enabled: false,
                               labelStr: "Pincode",
                             ),
                             SizedBox(
@@ -225,11 +218,7 @@ class _DonorProfileState extends State<DonorProfile> {
                               title: "Blood Type",
                               data: ["A", "B", "AB", "O"],
                               selectedDropdownValue: _bloodType,
-                              onChanged: (value) {
-                                setState(() {
-                                  _bloodType = value;
-                                });
-                              },
+                              onChanged: null,
                             ),
                             SizedBox(
                               height: spaceM,
@@ -253,8 +242,8 @@ class _DonorProfileState extends State<DonorProfile> {
                                 ),
                                 SizedBox(height: spaceS),
                                 DatePickerField(
-                                  onTap: () => _selectDate1(context),
-                                  selectedDate: selectedDate1.getDateFormat,
+                                  selectedDate: widget.model.donorId
+                                      .reportsDates.first.getSuccessDateFormat,
                                 ),
                                 SizedBox(height: spaceS),
                                 Text(
@@ -265,8 +254,8 @@ class _DonorProfileState extends State<DonorProfile> {
                                 ),
                                 SizedBox(height: spaceS),
                                 DatePickerField(
-                                  onTap: () => _selectDate2(context),
-                                  selectedDate: selectedDate2.getDateFormat,
+                                  selectedDate: widget.model.donorId
+                                      .reportsDates.second.getSuccessDateFormat,
                                 ),
                               ],
                             ),
