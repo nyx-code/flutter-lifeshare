@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifeshare/constant.dart';
-import 'package:lifeshare/screens/signup_screens/AccountType.dart';
-import 'package:lifeshare/screens/signup_screens/AddressInformation.dart';
-import 'package:lifeshare/screens/signup_screens/GeneralInformation.dart';
-import 'package:lifeshare/screens/signup_screens/MedicalInformation.dart';
-import 'package:lifeshare/screens/signup_screens/OtherInformation.dart';
-import 'package:lifeshare/screens/signup_screens/RecieverMedicalInformation.dart';
+import 'package:lifeshare/screens/signup/signup_screen/GeneralInformation.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 
 class SignupScreen extends StatelessWidget {

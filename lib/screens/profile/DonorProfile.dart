@@ -7,6 +7,7 @@ import 'package:lifeshare/widgets/DatePickerField.dart';
 import 'package:lifeshare/widgets/TextFields/DefaultTextField.dart';
 import 'package:lifeshare/widgets/TextFields/PinCodeField.dart';
 import 'package:lifeshare/utils/DateTime.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class DonorProfile extends StatefulWidget {
   @override
@@ -49,7 +50,9 @@ class _DonorProfileState extends State<DonorProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Donor Profile"),
+      appBar: CustomAppBar(
+        title: "Donor Profile",
+      ),
       body: Container(
         color: nearlyWhite,
         child: SingleChildScrollView(

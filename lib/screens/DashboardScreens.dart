@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lifeshare/bloc/auth/auth_cubit.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/screens/dashboard_screens/HomeScreen.dart';
 import 'package:lifeshare/screens/dashboard_screens/MyProfileScreen.dart';
 import 'package:lifeshare/screens/dashboard_screens/PostScreen.dart';
 import 'package:lifeshare/screens/dashboard_screens/RequestScreen.dart';
+import 'package:lifeshare/screens/login_screen/LoginScreen.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -13,7 +16,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
   _getCurrentPage() {
     if (_currentIndex == 0) {
@@ -37,7 +40,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
     } else if (_currentIndex == 3) {
       return CustomAppBar(title: 'Available Requests');
     } else if (_currentIndex == 4) {
-      return CustomAppBar(title: 'My Profile');
+      return CustomAppBar(
+        title: 'My Profile',
+        actions: [
+          IconButton(
+              icon: Icon(
+                MdiIcons.logout,
+                color: black,
+              ),
+              onPressed: () {
+                BlocProvider.of<AuthCubit>(context).logOut();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                    (Route<dynamic> route) => false);
+              })
+        ],
+      );
     } else {
       return Container();
     }
@@ -57,7 +75,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: _getAppBar(),
       body: _getCurrentPage(),
       resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: kPrimaryColor,
