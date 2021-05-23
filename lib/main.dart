@@ -5,6 +5,7 @@ import 'package:lifeshare/screens/DonorProfile.dart';
 import 'package:lifeshare/screens/InitialScreen.dart';
 import 'package:lifeshare/screens/LoginScreen.dart';
 import 'package:lifeshare/screens/SignupScreen.dart';
+import 'package:lifeshare/screens/ViewStory.dart';
 import 'package:lifeshare/style/theme.dart';
 
 void main() {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         accentColor: kAccentColor,
         fontFamily: "Poppins",
       ),
-      home: DonorProfile(),
+      home: ViewStory(),
     );
   }
 }
