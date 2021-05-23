@@ -13,7 +13,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 4;
 
   _getCurrentPage() {
     if (_currentIndex == 0) {
@@ -56,6 +56,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       extendBody: true,
       appBar: _getAppBar(),
       body: _getCurrentPage(),
+      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomPadding: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: kPrimaryColor,

@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                       PostItem(
                         name: "Shailesh Kadam",
                         avatar:
-                            "https://gravatar.com/avatar/0f43050cb55784114a0810fa874e0a5b?d=mm&r=pg&s=200",
+                            "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png",
                         location: "Pune",
                         bloodtype: "O",
                         phonenumber: "+918446842249",
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                       PostItem(
                         name: "Tasmiya Kankurti",
                         avatar:
-                            "https://gravatar.com/avatar/0f43050cb55784114a0810fa874e0a5b?d=mm&r=pg&s=200",
+                            "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png",
                         location: "Solapur",
                         bloodtype: "O",
                         phonenumber: "+918446842249",
@@ -104,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                       PostItem(
                         name: "Shailesh Kadam",
                         avatar:
-                            "https://gravatar.com/avatar/0f43050cb55784114a0810fa874e0a5b?d=mm&r=pg&s=200",
+                            "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png",
                         location: "Pune",
                         bloodtype: "O",
                         phonenumber: "+918446842249",
@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                       PostItem(
                         name: "Tasmiya Kankurti",
                         avatar:
-                            "https://gravatar.com/avatar/0f43050cb55784114a0810fa874e0a5b?d=mm&r=pg&s=200",
+                            "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png",
                         location: "Solapur",
                         bloodtype: "O",
                         phonenumber: "+918446842249",
@@ -145,14 +145,14 @@ class HomeScreen extends StatelessWidget {
                       StoryItem(
                         name: "Shailesh Kadam",
                         avatar:
-                            "https://gravatar.com/avatar/0f43050cb55784114a0810fa874e0a5b?d=mm&r=pg&s=200",
+                            "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png",
                         text:
                             "Hello guys my name is Shailesh Kadamkasnckan kas ckac ancoascoanscias ciaicnasics",
                       ),
                       StoryItem(
                         name: "Shailesh Kadam",
                         avatar:
-                            "https://gravatar.com/avatar/0f43050cb55784114a0810fa874e0a5b?d=mm&r=pg&s=200",
+                            "https://www.hostpapa.hk/knowledgebase/wp-content/uploads/2018/04/1-13.png",
                         text:
                             "Hello guys my name is Shailesh Kadamkasnckan kas ckac ancoascoanscias ciaicnasics",
                       ),
