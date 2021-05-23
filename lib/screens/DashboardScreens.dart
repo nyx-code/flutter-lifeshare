@@ -13,7 +13,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _currentIndex = 4;
+  int _currentIndex = 1;
 
   _getCurrentPage() {
     if (_currentIndex == 0) {
