@@ -53,7 +53,7 @@ class PostCard extends StatelessWidget {
                       height: spaceS,
                     ),
                     Text(
-                      "Shailesh Kadam",
+                      name,
                       style: Theme.of(context)
                           .textTheme
                           .headline6
@@ -76,7 +76,7 @@ class PostCard extends StatelessWidget {
                             ),
                             SizedBox(width: spaceM),
                             Text(
-                              "Pune",
+                              location,
                               style: Theme.of(context)
                                   .textTheme
                                   .subtitle1
@@ -96,7 +96,7 @@ class PostCard extends StatelessWidget {
                             ),
                             SizedBox(width: spaceM),
                             Text(
-                              "O",
+                              bloodtype,
                               style: Theme.of(context)
                                   .textTheme
                                   .subtitle1
