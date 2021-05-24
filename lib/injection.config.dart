@@ -45,8 +45,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       dio: get<_i9.Dio>(), preferences: get<_i4.SharedPreferences>()));
   gh.factory<_i14.LoginCubit>(
       () => _i14.LoginCubit(loginRepo: get<_i10.LoginRepo>()));
-  gh.factory<_i15.DashboardCubit>(
-      () => _i15.DashboardCubit(dashboardRepo: get<_i12.DashboardRepo>()));
+  gh.factory<_i15.DashboardCubit>(() => _i15.DashboardCubit(
+      dashboardRepo: get<_i12.DashboardRepo>(),
+      loginRepo: get<_i10.LoginRepo>()));
   return get;
 }
 

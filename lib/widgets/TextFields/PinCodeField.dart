@@ -19,7 +19,7 @@ class PinCodeField extends StatelessWidget {
       controller: controller,
       enabled: enabled,
       labelTextStrr: labelStr,
-      isValidate: false,
+      isValidate: true,
       inputFormatters: [
         LengthLimitingTextInputFormatter(6),
         FilteringTextInputFormatter.digitsOnly

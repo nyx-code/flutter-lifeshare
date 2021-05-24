@@ -4,13 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lifeshare/bloc/auth/auth_cubit.dart';
 import 'package:lifeshare/bloc/dashboard/dashboard_cubit.dart';
 import 'package:lifeshare/constant.dart';
-import 'package:lifeshare/injection.dart';
-import 'package:lifeshare/model/dynamic_data/user_dynamic_details.dart';
 import 'package:lifeshare/screens/dashboard_screens/HomeScreen.dart';
 import 'package:lifeshare/screens/dashboard_screens/MyProfileScreen.dart';
 import 'package:lifeshare/screens/dashboard_screens/PostScreen.dart';
 import 'package:lifeshare/screens/dashboard_screens/RequestScreen.dart';
-import 'package:lifeshare/screens/login_screen/LoginScreen.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 

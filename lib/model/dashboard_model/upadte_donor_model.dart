@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lifeshare/model/dashboard_model/profile_model.dart';
 
+import 'address_model.dart';
+import 'reports_date.dart';
+
 class UpdateDateModel {
   int age;
   int weight;

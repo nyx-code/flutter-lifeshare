@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lifeshare/injection.dart';
+import 'package:lifeshare/model/dashboard_model/create_donor.dart';
 import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
 import 'package:lifeshare/model/dashboard_model/profile_model.dart';
 import 'package:lifeshare/model/dashboard_model/request_data.model.dart';
@@ -8,6 +9,7 @@ import 'package:lifeshare/model/dashboard_model/upadte_donor_model.dart';
 import 'package:lifeshare/model/dynamic_data/user_dynamic_details.dart';
 import 'package:lifeshare/model/login_model.dart';
 import 'package:lifeshare/services/repo/dashboard_repo.dart';
+import 'package:lifeshare/services/repo/login_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'dashboard_state.dart';
@@ -15,7 +17,9 @@ part 'dashboard_state.dart';
 @Injectable()
 class DashboardCubit extends Cubit<DashboardState> {
   final DashboardRepo dashboardRepo;
-  DashboardCubit({@required this.dashboardRepo}) : super(DashboardInitial());
+  final LoginRepo loginRepo;
+  DashboardCubit({@required this.loginRepo, @required this.dashboardRepo})
+      : super(DashboardInitial());
 
   Future<void> getUserData() async {
     emit(DashboardLoading());
@@ -68,5 +72,21 @@ class DashboardCubit extends Cubit<DashboardState> {
     emit(DashboardLoading());
     final _data = await dashboardRepo.getReceiveProfile(token: token);
     emit(GetRecevieProfileData(model: _data));
+  }
+
+  Future<void> createDonor({@required CreateDonorModel model}) async {
+    emit(DashboardLoading());
+    final _data = await dashboardRepo.crateDonorAccount(model: model);
+    final _logindata =
+        await loginRepo.login(email: model.email, password: model.password);
+    emit(DashboardSuccess());
+  }
+
+  Future<void> createReceiver({@required CreateDonorModel model}) async {
+    emit(DashboardLoading());
+    final _data = await dashboardRepo.crateReceiverAccount(model: model);
+    final _logindata = await loginRepo.recieverLogin(
+        email: model.email, password: model.password);
+    emit(DashboardSuccess());
   }
 }

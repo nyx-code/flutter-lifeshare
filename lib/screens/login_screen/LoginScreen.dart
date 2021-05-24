@@ -4,11 +4,14 @@ import 'package:lifeshare/bloc/auth/auth_cubit.dart';
 import 'package:lifeshare/bloc/login/login_cubit.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/screens/main_screen/main_screen.dart';
+import 'package:lifeshare/screens/signup/SignupScreen.dart';
+import 'package:lifeshare/screens/signup/signup_screen/AccountType.dart';
 import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/CustomButton.dart';
 import 'package:lifeshare/widgets/CustomDropDown.dart';
 import 'package:lifeshare/widgets/TextFields/EmailTextField.dart';
 import 'package:lifeshare/widgets/TextFields/PasswordTextField.dart';
+import 'package:lifeshare/widgets/footer/footer.dart';
 import 'package:lifeshare/widgets/loading.dart';
 
 import '../DashboardScreens.dart';
@@ -112,6 +115,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: spaceM),
+                Footer(
+                  firstText: "Don't have an account",
+                  secondText: 'Register',
+                  onPress: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => AccountType()),
+                    );
+                  },
+                )
               ],
             ),
           ),

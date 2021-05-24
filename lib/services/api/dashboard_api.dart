@@ -3,10 +3,14 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lifeshare/model/dashboard_model/address_model.dart';
+import 'package:lifeshare/model/dashboard_model/create_donor.dart';
 import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
 import 'package:lifeshare/model/dashboard_model/profile_model.dart';
+import 'package:lifeshare/model/dashboard_model/reports_date.dart';
 import 'package:lifeshare/model/dashboard_model/request_data.model.dart';
 import 'package:lifeshare/model/dashboard_model/upadte_donor_model.dart';
+import 'package:lifeshare/model/dynamic_data/user_dynamic_details.dart';
 import 'package:lifeshare/model/login_model.dart';
 import 'package:lifeshare/services/repo/dashboard_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -153,6 +157,42 @@ class DashboardApi extends DashboardRepo {
             },
           ));
       return ProfileDataModel.fromJson(response.data);
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<LoginDataModel> crateDonorAccount(
+      {@required CreateDonorModel model}) async {
+    try {
+      Response response;
+
+      final _url = "/donor/createdonor";
+
+      response = await dio.post(
+        _url,
+        data: model.toJson(),
+      );
+      return LoginDataModel.fromJson(response.data);
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<LoginDataModel> crateReceiverAccount(
+      {@required CreateDonorModel model}) async {
+    try {
+      Response response;
+
+      final _url = "/receiver/createreceiver";
+
+      response = await dio.post(
+        _url,
+        data: model.toJson(),
+      );
+      return LoginDataModel.fromJson(response.data);
     } catch (e) {
       throw Exception();
     }

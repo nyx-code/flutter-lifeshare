@@ -1,3 +1,6 @@
+import 'address_model.dart';
+import 'reports_date.dart';
+
 class DonorDataListModel {
   List<DonorDataModel> data;
 
@@ -75,50 +78,6 @@ class DonorId {
     data['avatar'] = this.avatar;
     data['mobile'] = this.mobile;
     data['bloodGroup'] = this.bloodGroup;
-    return data;
-  }
-}
-
-class Address {
-  String area;
-  String city;
-  String state;
-  int pincode;
-
-  Address({this.area, this.city, this.state, this.pincode});
-
-  Address.fromJson(Map<String, dynamic> json) {
-    area = json['area'];
-    city = json['city'];
-    state = json['state'];
-    pincode = json['pincode'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['area'] = this.area;
-    data['city'] = this.city;
-    data['state'] = this.state;
-    data['pincode'] = this.pincode;
-    return data;
-  }
-}
-
-class ReportsDates {
-  String first;
-  String second;
-
-  ReportsDates({this.first, this.second});
-
-  ReportsDates.fromJson(Map<String, dynamic> json) {
-    first = json['first'];
-    second = json['second'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['first'] = this.first;
-    data['second'] = this.second;
     return data;
   }
 }
