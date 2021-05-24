@@ -3,14 +3,11 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:lifeshare/model/dashboard_model/address_model.dart';
 import 'package:lifeshare/model/dashboard_model/create_donor.dart';
 import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
 import 'package:lifeshare/model/dashboard_model/profile_model.dart';
-import 'package:lifeshare/model/dashboard_model/reports_date.dart';
 import 'package:lifeshare/model/dashboard_model/request_data.model.dart';
 import 'package:lifeshare/model/dashboard_model/upadte_donor_model.dart';
-import 'package:lifeshare/model/dynamic_data/user_dynamic_details.dart';
 import 'package:lifeshare/model/login_model.dart';
 import 'package:lifeshare/services/repo/dashboard_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,13 +18,15 @@ class DashboardApi extends DashboardRepo {
   final Dio dio;
   DashboardApi({this.dio, @required this.preferences});
 
-  @override
+  @overrided
   Future<LoginDataModel> getUserDetails() async {
     SharedPreferences prefs = preferences;
     await prefs.reload();
     final data = prefs.getString('userdetails');
-
-    return LoginDataModel.fromJson(json.decode(data));
+    final password = prefs.getString('password');
+    return LoginDataModel.fromJson(
+      json.decode(data),
+    );
   }
 
   @override
@@ -193,6 +192,102 @@ class DashboardApi extends DashboardRepo {
         data: model.toJson(),
       );
       return LoginDataModel.fromJson(response.data);
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> removeDonor({token}) async {
+    try {
+      Response response;
+
+      final _url = "/post/deletepost";
+
+      response = await dio.delete(_url,
+          options: Options(
+            headers: {
+              'Accept': 'application/json',
+              'x-access-token': token,
+            },
+          ));
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> removeReceiver({token}) async {
+    try {
+      Response response;
+
+      final _url = "/request/deleterequest";
+
+      response = await dio.delete(_url,
+          options: Options(
+            headers: {
+              'Accept': 'application/json',
+              'x-access-token': token,
+            },
+          ));
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> addDonor({token}) async {
+    try {
+      Response response;
+
+      final _url = "/post/createpost";
+
+      response = await dio.post(_url,
+          options: Options(
+            headers: {
+              'Accept': 'application/json',
+              'x-access-token': token,
+            },
+          ));
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> addReceiver({token}) async {
+    try {
+      Response response;
+
+      final _url = "/receiver/createreceiver";
+
+      response = await dio.post(_url,
+          options: Options(
+            headers: {
+              'Accept': 'application/json',
+              'x-access-token': token,
+            },
+          ));
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> addStory({token, String data}) async {
+    try {
+      Response response;
+
+      final _url = "/story/createstory";
+
+      response = await dio.post(_url,
+          options: Options(
+            headers: {
+              'Accept': 'application/json',
+              'x-access-token': token,
+            },
+          ),
+          data: {"storyData": data});
     } catch (e) {
       throw Exception();
     }

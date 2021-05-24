@@ -9,6 +9,7 @@ import 'package:lifeshare/widgets/TextFields/DefaultTextField.dart';
 import 'package:lifeshare/widgets/TextFields/PinCodeField.dart';
 import 'package:lifeshare/utils/DateTime.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DonorProfile extends StatefulWidget {
   final DonorDataModel model;
@@ -98,7 +99,9 @@ class _DonorProfileState extends State<DonorProfile> {
                         padding: EdgeInsets.symmetric(horizontal: paddingS),
                         child: CustomButton(
                           title: 'CALL NOW',
-                          onPressed: () {},
+                          onPressed: () async {
+                            await launch("tel:${widget.model.donorId.mobile}");
+                          },
                         ),
                       ),
                     ],

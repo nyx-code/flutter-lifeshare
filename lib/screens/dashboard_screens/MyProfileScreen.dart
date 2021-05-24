@@ -25,7 +25,7 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   ProfileDataModel profileDataModel;
-
+  bool isDonor = false, isReceiver = false;
   TextEditingController _area, _city, _state, _pincode, _age, _weight;
 
   String _bloodType, _userType;
@@ -81,6 +81,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       setState(() {
         selectedDate2 = picked;
       });
+  }
+
+  _onRemoveDonor() {
+    final _data = getIt<UserDynamicData>().getLoginModel.accessToken;
+    BlocProvider.of<DashboardCubit>(context).removeDonor(token: _data);
+  }
+
+  _onRemoveReceiver() {
+    final _data = getIt<UserDynamicData>().getLoginModel.accessToken;
+    BlocProvider.of<DashboardCubit>(context).removeRequest(token: _data);
   }
 
   _onUpdateProfile() {
@@ -139,6 +149,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             selectedDate1 = DateTime.parse(profileDataModel.reportsDates.first);
             selectedDate2 =
                 DateTime.parse(profileDataModel.reportsDates.second);
+
+            isDonor = profileDataModel.isDonor;
           } else if (state is DashboardSuccess) {
             ScaffoldMessenger.of(context)
               ..showSnackBar(successSnackBar(title: 'Profile Updated'));
@@ -153,6 +165,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             _weight.text = profileDataModel.weight.toString();
             _gender = profileDataModel.gender;
             _bloodType = profileDataModel.patientBG;
+            isReceiver = profileDataModel.isRecevier;
           }
         }, builder: (context, state) {
           return Stack(
@@ -211,6 +224,38 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               style: Theme.of(context).textTheme.subtitle1,
                             ),
                             SizedBox(height: spaceM),
+                            if (isDonor)
+                              GestureDetector(
+                                onTap: _onRemoveDonor,
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Text(
+                                    'Remove Me as Donor',
+                                    style: TextStyle(
+                                        color: white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            if (isReceiver)
+                              GestureDetector(
+                                onTap: _onRemoveReceiver,
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(6)),
+                                  child: Text(
+                                    'Remove My Request',
+                                    style: TextStyle(
+                                        color: white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              )
                           ],
                         ),
                       ),

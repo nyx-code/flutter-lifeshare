@@ -9,6 +9,7 @@ import 'package:lifeshare/screens/dashboard_screens/widgets/PostItem.dart';
 import 'package:lifeshare/screens/dashboard_screens/widgets/StoryItem.dart';
 import 'package:lifeshare/screens/profile/DonorProfile.dart';
 import 'package:lifeshare/widgets/loading.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../ViewStory.dart';
 
@@ -117,6 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       );
                                     },
                                     child: PostItem(
+                                      onPress: () async {
+                                        await launch(
+                                            "tel:${_donorDataModel[index].donorId.mobile}");
+                                      },
                                       name: _donorDataModel[index].donorId.name,
                                       avatar:
                                           _donorDataModel[index].donorId.avatar,
@@ -160,6 +165,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemCount: _requestDataModel.length,
                                 itemBuilder: (context, index) {
                                   return PostItem(
+                                    onPress: () async {
+                                      await launch(
+                                          "tel:${_requestDataModel[index].receiverId.mobile}");
+                                    },
                                     name: _requestDataModel[index]
                                         .receiverId
                                         .name,

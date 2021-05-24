@@ -4,6 +4,8 @@ import 'reports_date.dart';
 class ProfileDataModel {
   Address address;
   ReportsDates reportsDates;
+  bool isDonor;
+  bool isRecevier;
   String sId;
   String name;
   String email;
@@ -24,6 +26,8 @@ class ProfileDataModel {
       this.name,
       this.email,
       this.avatar,
+      this.isDonor,
+      this.isRecevier,
       this.mobile,
       this.age,
       this.weight,
@@ -44,6 +48,8 @@ class ProfileDataModel {
     email = json['email'];
     avatar = json['avatar'];
     mobile = json['mobile'];
+    isDonor = json['isDonor'];
+    isRecevier = json['isReceiver'];
     age = json['age'];
     weight = json['weight'];
     bloodGroup = json['bloodGroup'];

@@ -23,9 +23,13 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   Future<void> getUserData() async {
     emit(DashboardLoading());
-    final _data = await dashboardRepo.getUserDetails();
-    getIt<UserDynamicData>().addLoginModel(model: _data);
-    emit(GetUserData(model: _data));
+    try {
+      final _data = await dashboardRepo.getUserDetails();
+      getIt<UserDynamicData>().addLoginModel(model: _data);
+      emit(GetUserData(model: _data));
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> getProfileData({@required String token}) async {
@@ -88,5 +92,45 @@ class DashboardCubit extends Cubit<DashboardState> {
     final _logindata = await loginRepo.recieverLogin(
         email: model.email, password: model.password);
     emit(DashboardSuccess());
+  }
+
+  Future<void> removeDonor({@required String token}) async {
+    emit(DashboardLoading());
+    final _data = await dashboardRepo.removeDonor(token: token);
+    getProfileData(token: token);
+    final _userData = getIt<UserDynamicData>().getLoginModel;
+
+    emit(DashboardSuccess());
+  }
+
+  Future<void> removeRequest({@required String token}) async {
+    emit(DashboardLoading());
+    final _data = await dashboardRepo.removeReceiver(token: token);
+    getReceiveProfile(token: token);
+    final _userData = getIt<UserDynamicData>().getLoginModel;
+
+    emit(DashboardSuccess());
+  }
+
+  Future<void> addDonor({@required String token}) async {
+    emit(OtherLoading());
+    final _data = await dashboardRepo.addDonor(token: token);
+    final _userData = getIt<UserDynamicData>().getLoginModel;
+
+    emit(AddSuccess());
+  }
+
+  Future<void> addRequest({@required String token}) async {
+    emit(OtherLoading());
+    final _data = await dashboardRepo.addReceiver(token: token);
+    final _userData = getIt<UserDynamicData>().getLoginModel;
+
+    emit(AddSuccess());
+  }
+
+  Future<void> addStory({@required String token, @required String data}) async {
+    emit(DashboardLoading());
+    final _data = await dashboardRepo.addStory(token: token, data: data);
+    emit(AddSuccess());
   }
 }

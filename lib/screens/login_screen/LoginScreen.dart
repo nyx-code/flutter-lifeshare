@@ -58,74 +58,76 @@ class _LoginScreenState extends State<LoginScreen> {
     }, builder: (context, state) {
       return Stack(
         children: [
-          Container(
-            color: nearlyWhite,
-            child: Column(
-              children: [
-                SizedBox(height: spaceM * 3),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: paddingM),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: paddingM,
-                    ),
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(6),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 10,
-                          offset: Offset(0, 5),
-                        ),
-                      ],
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: spaceM + spaceS,
-                          ),
-                          EmailTextField(
-                            controller: _emailController,
-                            validate: true,
-                          ),
-                          PasswordTextField(_passwordController),
-                          CustomDropDown(
-                            title: "Account Type",
-                            data: ["Donor", "Reciever"],
-                            selectedDropdownValue: _userType,
-                            onChanged: (value) {
-                              setState(() {
-                                _userType = value;
-                              });
-                            },
-                          ),
-                          CustomButton(
-                            title: 'LOGIN',
-                            onPressed: _onPress,
-                          ),
-                          SizedBox(
-                            height: spaceM + spaceS,
+          SingleChildScrollView(
+            child: Container(
+              color: nearlyWhite,
+              child: Column(
+                children: [
+                  SizedBox(height: spaceM * 3),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: paddingM),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: paddingM,
+                      ),
+                      decoration: BoxDecoration(
+                        color: white,
+                        borderRadius: BorderRadius.circular(6),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 5,
+                            blurRadius: 10,
+                            offset: Offset(0, 5),
                           ),
                         ],
                       ),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: spaceM + spaceS,
+                            ),
+                            EmailTextField(
+                              controller: _emailController,
+                              validate: true,
+                            ),
+                            PasswordTextField(_passwordController),
+                            CustomDropDown(
+                              title: "Account Type",
+                              data: ["Donor", "Reciever"],
+                              selectedDropdownValue: _userType,
+                              onChanged: (value) {
+                                setState(() {
+                                  _userType = value;
+                                });
+                              },
+                            ),
+                            CustomButton(
+                              title: 'LOGIN',
+                              onPressed: _onPress,
+                            ),
+                            SizedBox(
+                              height: spaceM + spaceS,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: spaceM),
-                Footer(
-                  firstText: "Don't have an account",
-                  secondText: 'Register',
-                  onPress: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => AccountType()),
-                    );
-                  },
-                )
-              ],
+                  SizedBox(height: spaceM),
+                  Footer(
+                    firstText: "Don't have an account",
+                    secondText: 'Register',
+                    onPress: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => AccountType()),
+                      );
+                    },
+                  )
+                ],
+              ),
             ),
           ),
           if (state is LoginLoading) Loading()

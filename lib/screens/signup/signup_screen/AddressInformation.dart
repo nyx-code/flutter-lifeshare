@@ -46,7 +46,6 @@ class _AddressInformationState extends State<AddressInformation> {
 
   @override
   Widget build(BuildContext context) {
-    print(getIt<UserDynamicData>().getAccountType);
     return Scaffold(
         appBar: CustomAppBar(
           title: 'Address Information',

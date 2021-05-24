@@ -7,6 +7,8 @@ class LoginDataModel {
   Address address;
   ReportsDates reportsDates;
   String sId;
+  bool isDonor;
+  bool isRecevier;
   String name;
   String email;
   String avatar;
@@ -27,6 +29,8 @@ class LoginDataModel {
       this.name,
       this.email,
       this.avatar,
+      this.isDonor,
+      this.isRecevier,
       this.mobile,
       this.age,
       this.weight,
@@ -44,6 +48,8 @@ class LoginDataModel {
     reportsDates = json['reportsDates'] != null
         ? new ReportsDates.fromJson(json['reportsDates'])
         : null;
+    isDonor = json['isDonor'];
+    isRecevier = json['isReceiver'];
     sId = json['_id'];
     name = json['name'];
     email = json['email'];

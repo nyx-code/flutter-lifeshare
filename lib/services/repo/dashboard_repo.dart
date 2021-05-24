@@ -22,4 +22,9 @@ abstract class DashboardRepo {
   Future<LoginDataModel> crateDonorAccount({@required CreateDonorModel model});
   Future<LoginDataModel> crateReceiverAccount(
       {@required CreateDonorModel model});
+  Future<void> removeDonor({@required token});
+  Future<void> removeReceiver({@required token});
+  Future<void> addDonor({@required token});
+  Future<void> addReceiver({@required token});
+  Future<void> addStory({@required token, @required String data});
 }

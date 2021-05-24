@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lifeshare/constant.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PostItem extends StatelessWidget {
   final String name, bloodtype, phonenumber, avatar, location;
-
+  final Function onPress;
   const PostItem(
       {Key key,
       @required this.name,
       @required this.bloodtype,
       @required this.phonenumber,
       @required this.avatar,
-      @required this.location})
+      @required this.location,
+      @required this.onPress})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -116,25 +118,28 @@ class PostItem extends StatelessWidget {
               ),
             ),
             SizedBox(height: spaceM),
-            Container(
-              padding: EdgeInsets.all(paddingS + 4),
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.call, color: white),
-                  SizedBox(width: spaceM),
-                  Text(
-                    "Call",
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle1
-                        .copyWith(color: white, fontWeight: FontWeight.w700),
-                  )
-                ],
+            GestureDetector(
+              onTap: onPress,
+              child: Container(
+                padding: EdgeInsets.all(paddingS + 4),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.call, color: white),
+                    SizedBox(width: spaceM),
+                    Text(
+                      "Call",
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle1
+                          .copyWith(color: white, fontWeight: FontWeight.w700),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

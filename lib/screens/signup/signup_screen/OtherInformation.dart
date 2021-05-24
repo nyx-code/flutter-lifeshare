@@ -10,6 +10,7 @@ import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/CustomButton.dart';
 import 'package:lifeshare/widgets/CustomDropDown.dart';
 import 'package:lifeshare/widgets/TextFields/DefaultTextField.dart';
+import 'package:lifeshare/widgets/snackbar/error_snakbar.dart';
 
 import '../../../injection.dart';
 
@@ -28,19 +29,24 @@ class _OtherInformationState extends State<OtherInformation> {
 
   _onNext() {
     if (_formKey.currentState.validate()) {
-      getIt<UserDynamicData>().addOtherInformation(
-        model: OtherInformationModel(
-            age: int.parse(_age.text),
-            weight: int.parse(_weight.text),
-            gender: _gender,
-            haveChild: _child),
-      );
+      if (_child == "Yes") {
+        ScaffoldMessenger.of(context)
+          ..showSnackBar(errorSnackBar(title: 'You should not have child'));
+      } else {
+        getIt<UserDynamicData>().addOtherInformation(
+          model: OtherInformationModel(
+              age: int.parse(_age.text),
+              weight: int.parse(_weight.text),
+              gender: _gender,
+              haveChild: _child),
+        );
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return BlocProvider(
-            create: (context) => getIt<DashboardCubit>(),
-            child: MedicalInformation());
-      }));
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+              create: (context) => getIt<DashboardCubit>(),
+              child: MedicalInformation());
+        }));
+      }
     }
   }
 
@@ -94,6 +100,15 @@ class _OtherInformationState extends State<OtherInformation> {
                           LengthLimitingTextInputFormatter(2),
                         ],
                         type: TextInputType.phone,
+                        validator: (v) {
+                          if (v.isEmpty) {
+                            return 'Please enter valid Age';
+                          } else if (int.parse(v) < 18) {
+                            return 'Age is should not be less than 18';
+                          } else if (int.parse(v) > 60) {
+                            return 'Age is should not be greater than 60';
+                          }
+                        },
                         controller: _age,
                         labelTextStrr: "Age",
                       ),
@@ -104,6 +119,13 @@ class _OtherInformationState extends State<OtherInformation> {
                         ],
                         type: TextInputType.phone,
                         controller: _weight,
+                        validator: (v) {
+                          if (v.isEmpty) {
+                            return 'Please enter valid Weight';
+                          } else if (int.parse(v) < 50) {
+                            return 'Weight is should not be less than 50';
+                          }
+                        },
                         labelTextStrr: "Weight",
                       ),
                       CustomDropDown(

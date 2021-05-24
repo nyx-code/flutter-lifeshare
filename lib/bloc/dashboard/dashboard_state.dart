@@ -9,11 +9,15 @@ class DashboardLoading extends DashboardState {}
 
 class DashboardSuccess extends DashboardState {}
 
+class AddSuccess extends DashboardState {}
+
 class DashboardFailed extends DashboardState {
   final String msg;
 
   DashboardFailed(this.msg);
 }
+
+class OtherLoading extends DashboardState {}
 
 class GetUserData extends DashboardState {
   final LoginDataModel model;

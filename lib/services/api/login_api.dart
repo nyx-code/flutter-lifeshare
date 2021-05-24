@@ -21,7 +21,7 @@ class LoginApi extends LoginRepo {
 
       response =
           await dio.post(_url, data: {"email": email, "password": password});
-      storeUserData(response.data);
+      storeUserData(response.data, password);
       return LoginDataModel.fromJson(response.data);
     } catch (e) {
       throw Exception();
@@ -30,10 +30,15 @@ class LoginApi extends LoginRepo {
 
   void storeUserData(
     Map json,
+    String password,
   ) async {
     SharedPreferences prefs = preferences;
-    prefs.reload();
-    prefs.setString('userdetails', jsonEncode(json));
+    await prefs.reload();
+    await prefs.setString(
+      'userdetails',
+      jsonEncode(json),
+    );
+    prefs.setString('password', password);
   }
 
   @override
@@ -45,7 +50,10 @@ class LoginApi extends LoginRepo {
 
       response =
           await dio.post(_url, data: {"email": email, "password": password});
-      storeUserData(response.data);
+      storeUserData(
+        response.data,
+        password,
+      );
       return LoginDataModel.fromJson(response.data);
     } catch (e) {
       throw Exception();
