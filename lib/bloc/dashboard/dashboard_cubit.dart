@@ -133,4 +133,10 @@ class DashboardCubit extends Cubit<DashboardState> {
     final _data = await dashboardRepo.addStory(token: token, data: data);
     emit(AddSuccess());
   }
+
+  Future<void> searchDonors({String type}) async {
+    emit(DashboardLoading());
+    final _data = await dashboardRepo.searchDonor(data: type);
+    emit(GetDonorsData(model: _data.data));
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lifeshare/bloc/auth/auth_cubit.dart';
 import 'package:lifeshare/bloc/dashboard/dashboard_cubit.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/injection.dart';
@@ -9,6 +10,8 @@ import 'package:lifeshare/model/dashboard_model/profile_model.dart';
 import 'package:lifeshare/model/dashboard_model/reports_date.dart';
 import 'package:lifeshare/model/dashboard_model/upadte_donor_model.dart';
 import 'package:lifeshare/model/dynamic_data/user_dynamic_details.dart';
+import 'package:lifeshare/screens/login_screen/Login.dart';
+import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/CustomButton.dart';
 import 'package:lifeshare/widgets/CustomDropDown.dart';
 import 'package:lifeshare/widgets/DatePickerField.dart';
@@ -17,6 +20,9 @@ import 'package:lifeshare/widgets/TextFields/PinCodeField.dart';
 import 'package:lifeshare/utils/DateTime.dart';
 import 'package:lifeshare/widgets/loading.dart';
 import 'package:lifeshare/widgets/snackbar/success_snackbar.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../InitialScreen.dart';
 
 class MyProfileScreen extends StatefulWidget {
   @override
@@ -40,13 +46,15 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void initState() {
     super.initState();
     final _data = getIt<UserDynamicData>().getLoginModel;
-    _userType = _data.userType;
-    if (_data.userType == "Donor") {
-      BlocProvider.of<DashboardCubit>(context)
-          .getProfileData(token: _data.accessToken);
-    } else {
-      BlocProvider.of<DashboardCubit>(context)
-          .getReceiveProfile(token: _data.accessToken);
+    if (_data != null) {
+      _userType = _data.userType;
+      if (_data.userType == "Donor") {
+        BlocProvider.of<DashboardCubit>(context)
+            .getProfileData(token: _data.accessToken);
+      } else {
+        BlocProvider.of<DashboardCubit>(context)
+            .getReceiveProfile(token: _data.accessToken);
+      }
     }
 
     _area = TextEditingController();
@@ -132,6 +140,22 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CustomAppBar(
+          title: 'My Profile',
+          actions: [
+            IconButton(
+                icon: Icon(
+                  MdiIcons.logout,
+                  color: black,
+                ),
+                onPressed: () {
+                  BlocProvider.of<AuthCubit>(context).logOut();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => InitialScreen()),
+                      (Route<dynamic> route) => false);
+                })
+          ],
+        ),
         backgroundColor: nearlyWhite,
         body: BlocConsumer<DashboardCubit, DashboardState>(
             listener: (context, state) {

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lifeshare/bloc/dashboard/dashboard_cubit.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
 import 'package:lifeshare/model/dashboard_model/request_data.model.dart';
+import 'package:lifeshare/model/dynamic_data/user_dynamic_details.dart';
+import 'package:lifeshare/screens/dashboard_screens/story_add.dart';
 import 'package:lifeshare/screens/dashboard_screens/widgets/InformationCard.dart';
 import 'package:lifeshare/screens/dashboard_screens/widgets/PostItem.dart';
 import 'package:lifeshare/screens/dashboard_screens/widgets/StoryItem.dart';
 import 'package:lifeshare/screens/profile/DonorProfile.dart';
+import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/loading.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../injection.dart';
 import '../ViewStory.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,6 +26,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<DonorDataModel> _donorDataModel, _storyDataModel;
   List<RequestDataModel> _requestDataModel;
+  IconData _add;
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +38,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final type = getIt<UserDynamicData>().getLoginModel;
+    if (type != null) {
+      if (type != null && type.userType == "Donor") {
+        _add = FontAwesomeIcons.plusSquare;
+      }
+    }
     return Scaffold(
+      appBar: CustomAppBar(
+        title: 'Home',
+        actions: [
+          IconButton(
+            icon: Icon(_add),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return BlocProvider(
+                  create: (context) => getIt<DashboardCubit>(),
+                  child: CreateStoryScreen(),
+                );
+              }));
+            },
+          )
+        ],
+      ),
       backgroundColor: nearlyWhite,
       body: BlocListener<DashboardCubit, DashboardState>(
           listener: (context, state) {

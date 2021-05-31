@@ -4,9 +4,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lifeshare/bloc/dashboard/dashboard_cubit.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
+import 'package:lifeshare/model/dynamic_data/user_dynamic_details.dart';
 import 'package:lifeshare/screens/dashboard_screens/widgets/PostCard.dart';
 import 'package:lifeshare/screens/profile/DonorProfile.dart';
+import 'package:lifeshare/widgets/CustomAppBar.dart';
+import 'package:lifeshare/widgets/CustomDropDown.dart';
 import 'package:lifeshare/widgets/loading.dart';
+
+import '../../injection.dart';
 
 class PostScreen extends StatefulWidget {
   @override
@@ -15,7 +20,6 @@ class PostScreen extends StatefulWidget {
 
 class _PostScreenState extends State<PostScreen> {
   List<DonorDataModel> _model;
-
   @override
   void initState() {
     super.initState();
@@ -26,6 +30,7 @@ class _PostScreenState extends State<PostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: nearlyWhite,
+        appBar: CustomAppBar(title: 'Available Donors'),
         body: BlocConsumer<DashboardCubit, DashboardState>(
             listener: (context, state) {
           if (state is GetDonorsData) {
@@ -33,28 +38,34 @@ class _PostScreenState extends State<PostScreen> {
           }
         }, builder: (context, state) {
           if (_model != null)
-            return ListView.builder(
-                itemCount: _model.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DonorProfile(
-                            model: _model[index],
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: _model.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => DonorProfile(
+                                  model: _model[index],
+                                ),
+                              ),
+                            );
+                          },
+                          child: PostCard(
+                            name: _model[index].donorId.name,
+                            avatar: _model[index].donorId.avatar,
+                            location: _model[index].donorId.address.city,
+                            bloodtype: _model[index].donorId.bloodGroup,
+                            phonenumber: "+91${_model[index].donorId.mobile}",
                           ),
-                        ),
-                      );
-                    },
-                    child: PostCard(
-                      name: _model[index].donorId.name,
-                      avatar: _model[index].donorId.avatar,
-                      location: _model[index].donorId.address.city,
-                      bloodtype: _model[index].donorId.bloodGroup,
-                      phonenumber: "+91${_model[index].donorId.mobile}",
-                    ),
-                  );
-                });
+                        );
+                      }),
+                ),
+              ],
+            );
           else
             return Center(
               child: SmallLoading(),

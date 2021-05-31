@@ -18,7 +18,7 @@ class DashboardApi extends DashboardRepo {
   final Dio dio;
   DashboardApi({this.dio, @required this.preferences});
 
-  @overrided
+  @override
   Future<LoginDataModel> getUserDetails() async {
     SharedPreferences prefs = preferences;
     await prefs.reload();
@@ -259,7 +259,7 @@ class DashboardApi extends DashboardRepo {
     try {
       Response response;
 
-      final _url = "/receiver/createreceiver";
+      final _url = "/request/createrequest";
 
       response = await dio.post(_url,
           options: Options(
@@ -288,6 +288,22 @@ class DashboardApi extends DashboardRepo {
             },
           ),
           data: {"storyData": data});
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<DonorDataListModel> searchDonor({token, String data}) async {
+    try {
+      Response response;
+
+      final _url = "/request/search/$data";
+
+      response = await dio.get(
+        _url,
+      );
+      return DonorDataListModel.fromJson(response.data);
     } catch (e) {
       throw Exception();
     }

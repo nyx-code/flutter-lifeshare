@@ -3,6 +3,8 @@ import 'package:lifeshare/animation/FadeAnimation.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/style/theme.dart';
 
+import 'login_screen/Login.dart';
+
 class InitialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -81,8 +83,10 @@ class InitialScreen extends StatelessWidget {
                         height: 40.0,
                         child: RaisedButton(
                           onPressed: () {
-                            // Navigator.of(context)
-                            //     .pushReplacementNamed(HomeScreen.routeName);
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => Login()),
+                                (Route<dynamic> route) => false);
                           },
                           child: Text(
                             'Got it',

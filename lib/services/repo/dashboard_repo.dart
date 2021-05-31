@@ -27,4 +27,5 @@ abstract class DashboardRepo {
   Future<void> addDonor({@required token});
   Future<void> addReceiver({@required token});
   Future<void> addStory({@required token, @required String data});
+  Future<DonorDataListModel> searchDonor({@required String data});
 }

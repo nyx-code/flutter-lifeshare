@@ -6,6 +6,7 @@ import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/model/dashboard_model/donor_data_model.dart';
 import 'package:lifeshare/model/dashboard_model/request_data.model.dart';
 import 'package:lifeshare/screens/dashboard_screens/widgets/PostCard.dart';
+import 'package:lifeshare/widgets/CustomAppBar.dart';
 import 'package:lifeshare/widgets/loading.dart';
 
 class RequestScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class _RequestScreenState extends State<RequestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: CustomAppBar(title: 'Available Requests'),
         backgroundColor: nearlyWhite,
         body: BlocConsumer<DashboardCubit, DashboardState>(
             listener: (context, state) {

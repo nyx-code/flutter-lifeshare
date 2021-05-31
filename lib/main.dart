@@ -5,6 +5,7 @@ import 'package:lifeshare/bloc/login/login_cubit.dart';
 import 'package:lifeshare/constant.dart';
 import 'package:lifeshare/injection.dart';
 import 'package:lifeshare/screens/DashboardScreens.dart';
+import 'package:lifeshare/screens/InitialScreen.dart';
 import 'package:lifeshare/screens/login_screen/Login.dart';
 import 'package:lifeshare/screens/login_screen/LoginScreen.dart';
 import 'package:lifeshare/screens/main_screen/main_screen.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           if (state is AppAuth) {
             return MainScreen();
           } else if (state is AppUnAuth) {
-            return Login();
+            return InitialScreen();
           } else if (state is AppLoading) {
             return LoadingFull();
           }

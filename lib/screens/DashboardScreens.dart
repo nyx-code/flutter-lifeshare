@@ -26,7 +26,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
   String _label = '';
   IconData _icon = FontAwesomeIcons.handHoldingWater;
-  IconData _add;
 
   _getCurrentPage() {
     if (_currentIndex == 0) {
@@ -37,48 +36,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       return RequestScreen();
     } else if (_currentIndex == 4) {
       return MyProfileScreen();
-    }
-  }
-
-  _getAppBar() {
-    if (_currentIndex == 0) {
-      return CustomAppBar(
-        title: 'Home',
-        actions: [
-          IconButton(
-            icon: Icon(_add),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return BlocProvider(
-                  create: (context) => getIt<DashboardCubit>(),
-                  child: CreateStoryScreen(),
-                );
-              }));
-            },
-          )
-        ],
-      );
-    } else if (_currentIndex == 1) {
-      return CustomAppBar(title: 'Available Donors');
-    } else if (_currentIndex == 3) {
-      return CustomAppBar(title: 'Available Requests');
-    } else if (_currentIndex == 4) {
-      return CustomAppBar(
-        title: 'My Profile',
-        actions: [
-          IconButton(
-              icon: Icon(
-                MdiIcons.logout,
-                color: black,
-              ),
-              onPressed: () {
-                BlocProvider.of<AuthCubit>(context).logOut();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => Login()),
-                    (Route<dynamic> route) => false);
-              })
-        ],
-      );
     }
   }
 
@@ -98,7 +55,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             setState(() {
               _label = "Be Donor";
               _icon = FontAwesomeIcons.handHoldingWater;
-              _add = FontAwesomeIcons.plusSquare;
             });
           } else {
             setState(() {
@@ -113,7 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: BlocBuilder<DashboardCubit, DashboardState>(
         builder: (context, state) {
           return Scaffold(
-            appBar: _getAppBar(),
+            // appBar: _getAppBar(),
             body: Stack(
               children: [
                 _getCurrentPage(),
